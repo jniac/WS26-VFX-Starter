@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/OutdoorsScene.unity
-    guid: 8124e5870f4fd4c779e7a5f994e84ad1
+    path: Assets/Art/Scenes/Craft.unity
+    guid: 3c4f2081eca8018408852dfab976c07f
+  - enabled: 1
+    path: Assets/Art/Scenes/Outdoors.unity
+    guid: 68b54f56e4556a04dbf90f357c917e17
+  - enabled: 1
+    path: Assets/Art/Scenes/Third-Demo.unity
+    guid: a622a55735a865648830ddd9dd3388a7
+  - enabled: 1
+    path: Assets/Art/Scenes/Tunnel-Demo-SectionA.unity
+    guid: 4b7838156f85f7847b937f13fee0cc20
+  - enabled: 1
+    path: Assets/Art/Scenes/Tunnel-Demo-SectionB.unity
+    guid: 0a3c82a07c492b6489159910598560cc
+  - enabled: 1
+    path: Assets/Art/Scenes/Tunnel-Demo.unity
+    guid: 8b100a4155938b54fa54a097be0d1299
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
   m_UseUCBPForAssetBundles: 0
