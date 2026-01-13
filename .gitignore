@@ -101,5 +101,6 @@ InitTestScene*.unity*
 .DS_Store
 
 .vscode/
-/[Aa]ssets/Temp
-/[Aa]ssets/Temp.meta
+/[Aa]ssets/Art/Temp
+/[Aa]ssets/Art/Temp.meta
+/Files
