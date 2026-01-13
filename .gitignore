@@ -103,4 +103,6 @@ InitTestScene*.unity*
 .vscode/
 /[Aa]ssets/Art/Temp
 /[Aa]ssets/Art/Temp.meta
-/Files
+/Files/*
+!/Files/jpg/
+!/Files/jpg/*
