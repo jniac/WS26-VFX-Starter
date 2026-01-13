@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class Tunnel : MonoBehaviour
+public class TunnelMesher : MonoBehaviour
 {
     [Range(0, 18)]
     public int sides = 6;

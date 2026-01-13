@@ -37,6 +37,14 @@ public class TunnelManager : MonoBehaviour
         }
     }
 
+    void SwitchScene()
+    {
+        var scenes = new string[] { "Tunnel-Demo-SectionA", "Tunnel-Demo-SectionB" };
+        var currentIndex = System.Array.IndexOf(scenes, SceneManager.GetActiveScene().name);
+        var nextIndex = (currentIndex + 1) % scenes.Length;
+        SceneManager.LoadScene(scenes[nextIndex]);
+    }
+
     void OnValidate()
     {
         gameObject.name = "Tunnel Manager";
@@ -58,14 +66,10 @@ public class TunnelManager : MonoBehaviour
 
     void Update()
     {
-
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            var scenes = new string[] { "Tunnel-Demo-SectionA", "Tunnel-Demo-SectionB" };
-            var currentIndex = System.Array.IndexOf(scenes, SceneManager.GetActiveScene().name);
-            var nextIndex = (currentIndex + 1) % scenes.Length;
-            SceneManager.LoadScene(scenes[nextIndex]);
-        }
+        var shouldSwitchScene = Keyboard.current.enterKey.wasPressedThisFrame
+            || Gamepad.current?.buttonSouth.wasPressedThisFrame == true;
+        if (shouldSwitchScene)
+            SwitchScene();
 
         if (dollyTransform == null)
             dollyTransform = FindDollyTransform();
