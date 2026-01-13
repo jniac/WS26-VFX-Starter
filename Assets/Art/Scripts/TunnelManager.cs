@@ -14,14 +14,25 @@ public class TunnelManager : MonoBehaviour
     /// <returns></returns>
     Transform FindDollyTransform()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        GameObject[] rootObjects = currentScene.GetRootGameObjects();
-
-        foreach (GameObject obj in rootObjects)
+        if (Application.isPlaying)
         {
-            if (obj.name == "Tunnel Dolly")
+            Scene currentScene = SceneManager.GetActiveScene();
+            GameObject[] rootObjects = currentScene.GetRootGameObjects();
+
+            foreach (GameObject obj in rootObjects)
             {
-                return obj.transform;
+                if (obj.name == "Tunnel Dolly")
+                {
+                    return obj.transform;
+                }
+            }
+        }
+        else
+        {
+            GameObject dollyObj = GameObject.Find("Tunnel Dolly");
+            if (dollyObj != null)
+            {
+                return dollyObj.transform;
             }
         }
 
