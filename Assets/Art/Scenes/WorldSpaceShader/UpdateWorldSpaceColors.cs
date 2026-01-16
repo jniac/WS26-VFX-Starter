@@ -13,9 +13,9 @@ public class UpdateWorldSpaceColors : MonoBehaviour
     {
         if (TryGetComponent<MeshRenderer>(out var meshRenderer))
         {
-            meshRenderer.material.SetColor("_Spot4_Color", spot4Color);
-            meshRenderer.material.SetVector("_Spot4_Position", spot4Transform.position);
-            meshRenderer.material.SetVector("_Spot4_Props", new Vector4(spot4RangeStart, spot4RangeEnd, spot4Intensity, 0));
+            meshRenderer.sharedMaterial.SetColor("_Spot4_Color", spot4Color);
+            meshRenderer.sharedMaterial.SetVector("_Spot4_Position", spot4Transform.position);
+            meshRenderer.sharedMaterial.SetVector("_Spot4_Props", new Vector4(spot4RangeStart, spot4RangeEnd, spot4Intensity, 0));
         }
     }
 }
