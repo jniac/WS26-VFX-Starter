@@ -1193,7 +1193,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.Rendering.HighDefinition.ShaderGraph.SystemData",
     "m_ObjectId": "4d438c29a11c44a29ec72d6afcd84569",
-    "m_MaterialNeedsUpdateHash": 32,
+    "m_MaterialNeedsUpdateHash": 279871,
     "m_SurfaceType": 1,
     "m_RenderingPass": 4,
     "m_BlendMode": 1,
