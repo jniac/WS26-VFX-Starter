@@ -38,8 +38,6 @@ public class RegularPolygon : MonoBehaviour
         var uv = new Vector2[vertices.Length];
         var colors = new Color[vertices.Length];
 
-
-
         for (int i = 0; i < sides; i++)
         {
             float angle = 2 * Mathf.PI * (turnFactor + 0.25f + i / (float)sides);
@@ -101,6 +99,7 @@ public class RegularPolygon : MonoBehaviour
         mesh.triangles = triangles;
         mesh.normals = normals;
         mesh.uv = uv;
+        mesh.colors = colors;
         mesh.RecalculateBounds();
 
         var meshFilter = GetComponent<MeshFilter>();

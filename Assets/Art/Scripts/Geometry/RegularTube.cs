@@ -16,6 +16,9 @@ public class RegularTube : MonoBehaviour
 
     public float length = 10f;
 
+    [UnclampedRange(-1f, 1f)]
+    public float align = 0f;
+
     public Color vertexColor = Color.white;
 
     public float Radius =>
@@ -27,39 +30,77 @@ public class RegularTube : MonoBehaviour
 
         float radius = Radius;
 
-        Vector3[] vertices = new Vector3[sides * 4];
+        // Non-indexed: 2 triangles per side, 3 vertices per triangle = 6 vertices per side
+        Vector3[] vertices = new Vector3[sides * 6];
         Vector3[] normals = new Vector3[vertices.Length];
-        int[] triangles = new int[sides * 12];
+        int[] triangles = new int[vertices.Length];
         Vector2[] uv = new Vector2[vertices.Length];
         Color[] colors = new Color[vertices.Length];
+
+        int vi = 0;
 
         for (int i = 0; i < sides; i++)
         {
             float angle = 2 * Mathf.PI * (turnFactor + 0.25f + i / (float)sides);
+            float nextAngle = 2 * Mathf.PI * (turnFactor + 0.25f + (i + 1) / (float)sides);
+            float normalAngle = 2 * Mathf.PI * (turnFactor + 0.25f + (i + 0.5f) / sides);
+
             float x = radius * Mathf.Cos(angle);
             float y = radius * Mathf.Sin(angle);
+            float z = length / 2f * align;
+            float nextX = radius * Mathf.Cos(nextAngle);
+            float nextY = radius * Mathf.Sin(nextAngle);
+            float normalX = Mathf.Cos(normalAngle);
+            float normalY = Mathf.Sin(normalAngle);
 
-            vertices[i * 4] = new Vector3(x, y, -length / 2);
-            vertices[i * 4 + 1] = new Vector3(x, y, length / 2);
+            var normal = new Vector3(-normalX, -normalY, 0);
 
-            normals[i * 4] = new Vector3(x, y, 0).normalized * -1f;
-            normals[i * 4 + 1] = new Vector3(x, y, 0).normalized * -1f;
+            float u = i / (float)sides;
+            float nextU = (i + 1) / (float)sides;
 
-            uv[i * 4] = new Vector2(i / (float)sides, 0);
-            uv[i * 4 + 1] = new Vector2(i / (float)sides, 1);
+            // First triangle of the quad
+            vertices[vi] = new(x, y, z - length / 2);
+            normals[vi] = normal;
+            uv[vi] = new(u, 0);
+            colors[vi] = vertexColor;
+            triangles[vi] = vi;
+            vi++;
 
-            colors[i * 4] = vertexColor;
-            colors[i * 4 + 1] = vertexColor;
+            vertices[vi] = new(x, y, z + length / 2);
+            normals[vi] = normal;
+            uv[vi] = new(u, 1);
+            colors[vi] = vertexColor;
+            triangles[vi] = vi;
+            vi++;
 
-            int nextI = (i + 1) % sides;
+            vertices[vi] = new(nextX, nextY, z - length / 2);
+            normals[vi] = normal;
+            uv[vi] = new(nextU, 0);
+            colors[vi] = vertexColor;
+            triangles[vi] = vi;
+            vi++;
 
-            triangles[i * 12] = i * 4;
-            triangles[i * 12 + 1] = i * 4 + 1;
-            triangles[i * 12 + 2] = nextI * 4;
+            // Second triangle of the quad
+            vertices[vi] = new(nextX, nextY, z - length / 2);
+            normals[vi] = normal;
+            uv[vi] = new(nextU, 0);
+            colors[vi] = vertexColor;
+            triangles[vi] = vi;
+            vi++;
 
-            triangles[i * 12 + 3] = nextI * 4;
-            triangles[i * 12 + 4] = i * 4 + 1;
-            triangles[i * 12 + 5] = nextI * 4 + 1;
+            vertices[vi] = new(x, y, z + length / 2);
+            normals[vi] = normal;
+            uv[vi] = new(u, 1);
+            colors[vi] = vertexColor;
+            triangles[vi] = vi;
+            vi++;
+
+            vertices[vi] = new(nextX, nextY, z + length / 2);
+            normals[vi] = normal;
+            uv[vi] = new(nextU, 1);
+            colors[vi] = vertexColor;
+            triangles[vi] = vi;
+            vi++;
         }
 
         mesh.vertices = vertices;
@@ -67,6 +108,8 @@ public class RegularTube : MonoBehaviour
         mesh.triangles = triangles;
         mesh.colors = colors;
         mesh.uv = uv;
+
+        mesh.RecalculateBounds();
 
         var meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = mesh;
