@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -25,6 +26,11 @@ public class RegularPolygon : MonoBehaviour
     public float Radius =>
         dimensionMode == GeometryUtils.DimensionMode.Radius ? dimension : GeometryUtils.SideLengthToRadius(sides, dimension);
 
+    float GetAngle(int index, float indexOffset = 0f)
+    {
+        return 2 * Mathf.PI * (turnFactor + 0.25f + (index + indexOffset) / sides);
+    }
+
     void ComputeMesh()
     {
         var mesh = new Mesh();
@@ -40,7 +46,7 @@ public class RegularPolygon : MonoBehaviour
 
         for (int i = 0; i < sides; i++)
         {
-            float angle = 2 * Mathf.PI * (turnFactor + 0.25f + i / (float)sides);
+            float angle = GetAngle(i);
             float xOuter = radius * Mathf.Cos(angle);
             float yOuter = radius * Mathf.Sin(angle);
             float xInner = innerRadius * Mathf.Cos(angle);
@@ -115,9 +121,12 @@ public class RegularPolygon : MonoBehaviour
             child.transform.parent = transform;
         }
 
-        while (transform.childCount > desiredChildCount)
+        var extraChildren = transform.Cast<Transform>()
+            .Skip(desiredChildCount)
+            .ToList();
+        foreach (var child in extraChildren)
         {
-            DestroyImmediate(transform.GetChild(transform.childCount - 1).gameObject);
+            DestroyImmediate(child.gameObject);
         }
 
         // \boxed{R' = R \cdot \cos\left(\frac{\pi}{n}\right)}
@@ -126,7 +135,7 @@ public class RegularPolygon : MonoBehaviour
         {
             var child = transform.GetChild(i);
             child.name = $"Side-{i}";
-            float angle = 2 * Mathf.PI * (turnFactor + (i + 0.5f) / sides);
+            float angle = GetAngle(i, indexOffset: 0.5f);
             float x = innerRadius * Mathf.Cos(angle);
             float y = innerRadius * Mathf.Sin(angle);
             child.localPosition = new Vector3(x, y, 0);
