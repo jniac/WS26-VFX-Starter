@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 175282212356444112}
   - component: {fileID: 1669668436264181817}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Tunnel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,14 +138,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c470003f4d5e041e98e152c7bf463768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularTube
-  dimensionMode: 0
-  dimension: 1
-  turnFactor: 0
-  sides: 6
-  length: 10
-  spreadFactor: 0
-  align: 1
-  vertexColor: {r: 0.052916534, g: 0, b: 0.6132076, a: 1}
+  parameters:
+    dimensionMode: 0
+    dimension: 1
+    turnFactor: 0
+    sides: 6
+    length: 10
+    spreadFactor: 0
+    align: 1
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &3506358882862682802
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ GameObject:
   - component: {fileID: 866484041013002099}
   - component: {fileID: 5088242947128739094}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Tunnel-Zebra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,14 +281,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c470003f4d5e041e98e152c7bf463768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularTube
-  dimensionMode: 0
-  dimension: 0.99
-  turnFactor: 0
-  sides: 6
-  length: 10
-  spreadFactor: 0
-  align: 1
-  vertexColor: {r: 0, g: 0, b: 0, a: 1}
+  parameters:
+    dimensionMode: 0
+    dimension: 0.9
+    turnFactor: 0
+    sides: 6
+    length: 20
+    spreadFactor: 0
+    align: 0
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &5490809902636260369
 GameObject:
   m_ObjectHideFlags: 0

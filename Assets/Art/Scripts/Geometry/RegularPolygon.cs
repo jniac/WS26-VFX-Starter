@@ -1,9 +1,44 @@
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class RegularPolygon : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Parameters
+    {
+        public GeometryUtils.DimensionMode dimensionMode;
+
+        public float dimension;
+
+        [UnclampedRange(-1f, 1f)]
+        public float turnFactor;
+
+        [UnclampedRange(0f, 2f)]
+        public float ringFactor;
+
+        [Range(3, 20)]
+        public int sides;
+
+        public Color vertexColor;
+
+        public bool doubleSided;
+
+        public static Parameters Default => new()
+        {
+            dimensionMode = GeometryUtils.DimensionMode.Radius,
+            dimension = 1f,
+            turnFactor = 0f,
+            ringFactor = 0f,
+            sides = 3,
+            vertexColor = Color.white,
+            doubleSided = true
+        };
+    }
+
+    public Parameters parameters = Parameters.Default;
+
     public GeometryUtils.DimensionMode dimensionMode = GeometryUtils.DimensionMode.Radius;
 
     public float dimension = 1f;
@@ -124,9 +159,19 @@ public class RegularPolygon : MonoBehaviour
         var extraChildren = transform.Cast<Transform>()
             .Skip(desiredChildCount)
             .ToList();
-        foreach (var child in extraChildren)
+        if (Application.isPlaying)
         {
-            DestroyImmediate(child.gameObject);
+            foreach (var child in extraChildren)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        else
+        {
+            foreach (var child in extraChildren)
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         // \boxed{R' = R \cdot \cos\left(\frac{\pi}{n}\right)}
@@ -147,5 +192,14 @@ public class RegularPolygon : MonoBehaviour
     {
         ComputeMesh();
         EnsureEmptyChildren();
+
+        parameters.dimensionMode = dimensionMode;
+        parameters.dimension = dimension;
+        parameters.turnFactor = turnFactor;
+        parameters.ringFactor = ringFactor;
+        parameters.sides = sides;
+        parameters.vertexColor = vertexColor;
+        parameters.doubleSided = doubleSided;
+        EditorUtility.SetDirty(this);
     }
 }

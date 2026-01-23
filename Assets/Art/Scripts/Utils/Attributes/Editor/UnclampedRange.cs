@@ -21,7 +21,7 @@ public class UnclampedRangeDrawer : PropertyDrawer
         float fieldWidth = position.width - sliderWidth - padding;
 
         Rect sliderRect = new(position.x, position.y, sliderWidth, position.height);
-        Rect fieldRect = new(position.x + sliderWidth, position.y, fieldWidth, position.height);
+        Rect fieldRect = new(position.x + sliderWidth + padding, position.y, fieldWidth, position.height);
 
         value = GUI.HorizontalSlider(sliderRect, value, range.min, range.max);
         value = EditorGUI.FloatField(fieldRect, value);

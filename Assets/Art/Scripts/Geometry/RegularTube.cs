@@ -1,71 +1,69 @@
 using UnityEngine;
 
-public enum DimensionMode { Radius, SideLength }
-
-[System.Serializable]
-public struct RegularTubeParameters
-{
-    public DimensionMode dimensionMode;
-    public float dimension;
-    public float turnFactor;
-    public int sides;
-    public float length;
-    public float spreadFactor;
-    public float align;
-    public Color vertexColor;
-
-    public static RegularTubeParameters Default => new RegularTubeParameters
-    {
-        dimensionMode = DimensionMode.Radius,
-        dimension = 1f,
-        turnFactor = 0f,
-        sides = 3,
-        length = 10f,
-        spreadFactor = 0f,
-        align = 0f,
-        vertexColor = Color.white
-    };
-}
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), ExecuteAlways]
 public class RegularTube : MonoBehaviour
 {
-    public RegularTubeParameters parameters = RegularTubeParameters.Default;
+    // STATIC:
+    public enum DimensionMode { Radius, SideLength }
 
-    public DimensionMode dimensionMode = DimensionMode.Radius;
-    DimensionMode _cachedDimensionMode = DimensionMode.Radius;
+    [System.Serializable]
+    public struct Parameters
+    {
+        public DimensionMode dimensionMode;
 
-    public float dimension = 1f;
-    float _cachedDimension = 1f;
+        public float dimension;
 
-    [UnclampedRange(-1f, 1f)]
-    public float turnFactor = 0f;
-    float _cachedTurnFactor = 0f;
+        [UnclampedRange(-0.5f, 0.5f)]
+        public float turnFactor;
 
-    public int sides = 3;
-    int _cachedSides = 0;
+        public int sides;
 
-    public float length = 10f;
-    float _cachedLength = 10f;
+        public float length;
 
-    public float spreadFactor = 0f;
-    float _cachedSpreadFactor = 0f;
+        public float spreadFactor;
 
-    [UnclampedRange(-1f, 1f)]
-    public float align = 0f;
-    float _cachedAlign = 0f;
+        [UnclampedRange(-1f, 1f)]
+        public float align;
 
-    public Color vertexColor = Color.white;
-    Color _cachedVertexColor = Color.white;
+        public Color vertexColor;
+
+        public static Parameters Default => new()
+        {
+            dimensionMode = DimensionMode.Radius,
+            dimension = 1f,
+            turnFactor = 0f,
+            sides = 3,
+            length = 10f,
+            spreadFactor = 0f,
+            align = 0f,
+            vertexColor = Color.white
+        };
+    }
+
+
+
+
+
+    // INSTANCE:
+    public Parameters parameters = Parameters.Default;
+    Parameters _cachedParameters = Parameters.Default;
 
     public float Radius =>
-        dimensionMode == DimensionMode.Radius ? dimension : dimension / (2 * Mathf.Sin(Mathf.PI / sides));
+        parameters.dimensionMode == DimensionMode.Radius ? parameters.dimension : parameters.dimension / (2 * Mathf.Sin(Mathf.PI / parameters.sides));
 
     public void ComputeMesh()
     {
         var mesh = new Mesh();
 
         float radius = Radius;
+
+        var sides = parameters.sides;
+        var length = parameters.length;
+        var turnFactor = parameters.turnFactor;
+        var spreadFactor = parameters.spreadFactor;
+        var align = parameters.align;
+        var vertexColor = parameters.vertexColor;
 
         // Non-indexed: 2 triangles per side, 3 vertices per triangle = 6 vertices per side
         Vector3[] vertices = new Vector3[sides * 6];
@@ -159,15 +157,7 @@ public class RegularTube : MonoBehaviour
 
     bool IsDirty()
     {
-        return
-            _cachedDimension != dimension ||
-            _cachedTurnFactor != turnFactor ||
-            _cachedSides != sides ||
-            _cachedLength != length ||
-            _cachedSpreadFactor != spreadFactor ||
-            _cachedAlign != align ||
-            _cachedVertexColor != vertexColor ||
-            _cachedDimensionMode != dimensionMode;
+        return _cachedParameters.Equals(parameters) == false;
     }
 
     bool ConsumeDirty()
@@ -177,29 +167,13 @@ public class RegularTube : MonoBehaviour
         if (!dirty)
             return false;
 
-        _cachedDimension = dimension;
-        _cachedTurnFactor = turnFactor;
-        _cachedSides = sides;
-        _cachedLength = length;
-        _cachedSpreadFactor = spreadFactor;
-        _cachedAlign = align;
-        _cachedVertexColor = vertexColor;
-        _cachedDimensionMode = dimensionMode;
+        _cachedParameters = parameters;
 
         return true;
     }
 
     void LateUpdate()
     {
-        parameters.dimensionMode = dimensionMode;
-        parameters.dimension = dimension;
-        parameters.turnFactor = turnFactor;
-        parameters.sides = sides;
-        parameters.length = length;
-        parameters.spreadFactor = spreadFactor;
-        parameters.align = align;
-        parameters.vertexColor = vertexColor;
-
         if (ConsumeDirty())
         {
             ComputeMesh();
