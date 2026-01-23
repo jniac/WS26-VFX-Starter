@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 120197550718417017}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.00000008742278, w: -1}
-  m_LocalPosition: {x: 0.93530744, y: 0.00000016353435, z: 0}
+  m_LocalPosition: {x: 0.8660254, y: 0.00000015142069, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 807734524127033362}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.86602545, w: 0.49999997}
-  m_LocalPosition: {x: -0.46765378, y: 0.81, z: 0}
+  m_LocalPosition: {x: -0.43301275, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 965244206252125544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.50000006, w: -0.8660254}
-  m_LocalPosition: {x: 0.46765363, y: -0.81000006, z: 0}
+  m_LocalPosition: {x: 0.4330126, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 2274956750714192935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.49999997, w: -0.8660254}
-  m_LocalPosition: {x: 0.46765378, y: 0.81, z: 0}
+  m_LocalPosition: {x: 0.43301275, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -233,13 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 1.08
-  turnFactor: 0
-  ringFactor: 0.87749296
-  sides: 6
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 1
+  parameters:
+    dimensionMode: 0
+    dimension: 1
+    turnFactor: 0
+    ringFactor: 0.86493677
+    sides: 6
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
+    doubleSided: 1
   createEmptyChildren: 1
 --- !u!1 &5073196816458093782
 GameObject:
@@ -266,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 5073196816458093782}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
-  m_LocalPosition: {x: -0.93530744, y: -0.000000081767176, z: 0}
+  m_LocalPosition: {x: -0.8660254, y: -0.000000075710346, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -297,7 +298,7 @@ Transform:
   m_GameObject: {fileID: 8821188021496912507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.8660254, w: -0.50000006}
-  m_LocalPosition: {x: -0.46765363, y: -0.81000006, z: 0}
+  m_LocalPosition: {x: -0.4330126, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -386,6 +387,14 @@ PrefabInstance:
     - target: {fileID: 8280178229525962957, guid: c11d48b940a26406fbc3f68b047a0f61, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402285941568690069, guid: c11d48b940a26406fbc3f68b047a0f61, type: 3}
+      propertyPath: parameters.vertexColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402285941568690069, guid: c11d48b940a26406fbc3f68b047a0f61, type: 3}
+      propertyPath: parameters.vertexColor.r
+      value: 0.8509804
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

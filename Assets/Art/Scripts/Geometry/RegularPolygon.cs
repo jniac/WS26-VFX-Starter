@@ -1,8 +1,7 @@
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), ExecuteAlways]
 public class RegularPolygon : MonoBehaviour
 {
     [System.Serializable]
@@ -38,32 +37,16 @@ public class RegularPolygon : MonoBehaviour
     }
 
     public Parameters parameters = Parameters.Default;
-
-    public GeometryUtils.DimensionMode dimensionMode = GeometryUtils.DimensionMode.Radius;
-
-    public float dimension = 1f;
-
-    [UnclampedRange(-1f, 1f)]
-    public float turnFactor = 0f;
-
-    [UnclampedRange(0f, 2f)]
-    public float ringFactor = 0f;
-
-    [Range(3, 20)]
-    public int sides = 3;
-
-    public Color vertexColor = Color.white;
-
-    public bool doubleSided = true;
+    Parameters _cachedParameters = Parameters.Default;
 
     public bool createEmptyChildren = false;
 
     public float Radius =>
-        dimensionMode == GeometryUtils.DimensionMode.Radius ? dimension : GeometryUtils.SideLengthToRadius(sides, dimension);
+        parameters.dimensionMode == GeometryUtils.DimensionMode.Radius ? parameters.dimension : GeometryUtils.SideLengthToRadius(parameters.sides, parameters.dimension);
 
     float GetAngle(int index, float indexOffset = 0f)
     {
-        return 2 * Mathf.PI * (turnFactor + 0.25f + (index + indexOffset) / sides);
+        return 2 * Mathf.PI * (parameters.turnFactor + 0.25f + (index + indexOffset) / parameters.sides);
     }
 
     void ComputeMesh()
@@ -71,6 +54,10 @@ public class RegularPolygon : MonoBehaviour
         var mesh = new Mesh();
 
         float radius = Radius;
+        float ringFactor = parameters.ringFactor;
+        bool doubleSided = parameters.doubleSided;
+        int sides = parameters.sides;
+        Color vertexColor = parameters.vertexColor;
         float innerRadius = radius * ringFactor;
 
         var vertices = new Vector3[sides * 2 * (doubleSided ? 2 : 1)];
@@ -149,7 +136,7 @@ public class RegularPolygon : MonoBehaviour
 
     void EnsureEmptyChildren()
     {
-        var desiredChildCount = createEmptyChildren ? sides : 0;
+        var desiredChildCount = createEmptyChildren ? parameters.sides : 0;
         while (transform.childCount < desiredChildCount)
         {
             var child = new GameObject();
@@ -170,12 +157,12 @@ public class RegularPolygon : MonoBehaviour
         {
             foreach (var child in extraChildren)
             {
-                Destroy(child.gameObject);
+                DestroyImmediate(child.gameObject);
             }
         }
 
         // \boxed{R' = R \cdot \cos\left(\frac{\pi}{n}\right)}
-        float innerRadius = Radius * Mathf.Cos(Mathf.PI / sides);
+        float innerRadius = Radius * Mathf.Cos(Mathf.PI / parameters.sides);
         for (int i = 0; i < transform.childCount; i++)
         {
             var child = transform.GetChild(i);
@@ -192,14 +179,31 @@ public class RegularPolygon : MonoBehaviour
     {
         ComputeMesh();
         EnsureEmptyChildren();
+    }
 
-        parameters.dimensionMode = dimensionMode;
-        parameters.dimension = dimension;
-        parameters.turnFactor = turnFactor;
-        parameters.ringFactor = ringFactor;
-        parameters.sides = sides;
-        parameters.vertexColor = vertexColor;
-        parameters.doubleSided = doubleSided;
-        EditorUtility.SetDirty(this);
+    bool IsDirty()
+    {
+        return _cachedParameters.Equals(parameters) == false;
+    }
+
+    bool ConsumeDirty()
+    {
+        bool dirty = IsDirty();
+
+        if (!dirty)
+            return false;
+
+        _cachedParameters = parameters;
+
+        return true;
+    }
+
+    void LateUpdate()
+    {
+        if (ConsumeDirty())
+        {
+            ComputeMesh();
+            EnsureEmptyChildren();
+        }
     }
 }

@@ -393,13 +393,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 1
-  turnFactor: 0
-  ringFactor: 0.8774929
-  sides: 6
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 1
+  parameters:
+    dimensionMode: 0
+    dimension: 1
+    turnFactor: 0
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!1 &5932223274296848409
 GameObject:
@@ -665,11 +666,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 6
-  turnFactor: 0
-  ringFactor: 0.15954418
-  sides: 6
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 1
+  parameters:
+    dimensionMode: 0
+    dimension: 6
+    turnFactor: 0
+    ringFactor: 0.15
+    sides: 6
+    vertexColor: {r: 1, g: 1, b: 1, a: 1}
+    doubleSided: 1
   createEmptyChildren: 1

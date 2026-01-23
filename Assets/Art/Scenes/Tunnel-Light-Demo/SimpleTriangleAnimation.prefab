@@ -136,13 +136,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &8318770131145737366
 Animator:
@@ -269,13 +270,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!1 &2973320220249786044
 GameObject:
@@ -477,13 +479,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &1244576267554041937
 Animator:
@@ -611,13 +614,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &5631414181033036810
 Animator:
@@ -830,13 +834,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &2364595727295364597
 Animator:
@@ -964,13 +969,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &2934788864584900330
 Animator:
@@ -1098,13 +1104,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &7295713174563704997
 Animator:
@@ -1264,13 +1271,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3003fc1c102514077a2c5e577c1fdc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegularPolygon
-  dimensionMode: 0
-  dimension: 0.2
-  turnFactor: 0.5
-  ringFactor: 0
-  sides: 3
-  vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
-  doubleSided: 0
+  parameters:
+    dimensionMode: 0
+    dimension: 0.25
+    turnFactor: 0.5
+    ringFactor: 0
+    sides: 3
+    vertexColor: {r: 0.8509804, g: 1, b: 0, a: 1}
+    doubleSided: 1
   createEmptyChildren: 0
 --- !u!95 &7801515985092096239
 Animator:
