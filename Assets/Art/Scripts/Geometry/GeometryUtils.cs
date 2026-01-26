@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class GeometryUtils
+public static partial class GeometryUtils
 {
 	public enum DimensionMode { Radius, SideLength }
 
