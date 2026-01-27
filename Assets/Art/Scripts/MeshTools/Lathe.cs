@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public static partial class MeshUtils
+public static partial class MeshTools
 {
   public enum LatheCapMode { None, Bottom, Top, Both }
 

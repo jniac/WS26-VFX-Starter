@@ -3,11 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class CapMesh : MonoBehaviour
 {
-    public MeshUtils.LatheParameters parameters = MeshUtils.LatheParameters.GetDefault();
+    public MeshTools.LatheParameters parameters = MeshTools.LatheParameters.GetDefault();
 
     void OnValidate()
     {
-        var mesh = MeshUtils.LatheMesh(parameters);
+        var mesh = MeshTools.LatheMesh(parameters);
         GetComponent<MeshFilter>().sharedMesh = mesh;
     }
 }

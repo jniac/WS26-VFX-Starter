@@ -1,10 +1,18 @@
 using UnityEngine;
 
-public static class RaycastUtils
+public static partial class MeshTools
 {
-  public static bool RayIntersectsTriangle(Ray ray, Vector3 v0, Vector3 v1, Vector3 v2, out Vector3 hitPoint, out float distance)
+  public static bool RayIntersectsTriangle(
+    Ray ray,
+    Vector3 v0,
+    Vector3 v1,
+    Vector3 v2,
+    out Vector3 hitPoint,
+    out float distance,
+    out Vector2 uv)
   {
     hitPoint = Vector3.zero;
+    uv = Vector2.zero;
     distance = 0f;
 
     Vector3 edge1 = v1 - v0;
@@ -26,6 +34,8 @@ public static class RaycastUtils
     if (distance < 0f) return false; // Triangle behind
 
     hitPoint = ray.origin + ray.direction * distance;
+    uv.x = u;
+    uv.y = v;
     return true;
   }
 
@@ -60,18 +70,19 @@ public static class RaycastUtils
 
     for (int i = 0; i < triangles.Length; i += 3)
     {
-      Vector3 a = vertices[triangles[i]];
-      Vector3 b = vertices[triangles[i + 1]];
-      Vector3 c = vertices[triangles[i + 2]];
+      Vector3 A = vertices[triangles[i]];
+      Vector3 B = vertices[triangles[i + 1]];
+      Vector3 C = vertices[triangles[i + 2]];
 
-      if (RayIntersectsTriangle(localRay, a, b, c, out var point, out var dist) && dist < closestDist)
+      if (RayIntersectsTriangle(localRay, A, B, C, out var localPoint, out var localDistance, out var uv) && localDistance < closestDist)
       {
-        closestDist = dist;
+        closestDist = localDistance;
         hitInfo.triangleIndex = i / 3;
-        hitInfo.localPoint = point;
-        hitInfo.worldPoint = meshTransform.TransformPoint(point);
+        hitInfo.localPoint = localPoint;
+        hitInfo.uv = uv;
+        hitInfo.worldPoint = meshTransform.TransformPoint(localPoint);
         hitInfo.distance = Vector3.Distance(worldRay.origin, hitInfo.worldPoint);
-        hitInfo.normal = meshTransform.TransformDirection(Vector3.Cross(b - a, c - a).normalized);
+        hitInfo.normal = meshTransform.TransformDirection(Vector3.Cross(B - A, C - A).normalized);
         hit = true;
       }
     }

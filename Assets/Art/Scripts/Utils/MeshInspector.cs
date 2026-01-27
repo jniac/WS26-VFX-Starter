@@ -157,7 +157,7 @@ public class MeshInspector : MonoBehaviour
                 var ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
                 var mesh = inspector.meshFilter.sharedMesh;
                 var transform = inspector.meshFilter.transform;
-                if (RaycastUtils.RaycastMesh(ray, mesh, transform, out var hitInfo))
+                if (MeshTools.RaycastMesh(ray, mesh, transform, out var hitInfo))
                 {
                     inspector.triangleIndex = hitInfo.triangleIndex;
 
